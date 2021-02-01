@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Verificar Numero</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container" class="ion-padding">
+    <ion-item>
+      <ion-label position="stacked">Número</ion-label>
+      <ion-input type="number" value={text} placeholder="Insira um número inteiro" required clearInput [(ngModel)]="numero"></ion-input>
+    </ion-item>
+    <ion-button expand="block" color="primary" (click)="verificarParOuImpar()">É par ou ímpar?</ion-button>
+    <ion-button expand="block" color="success" (click)="verificarPrimo()">É primo?</ion-button>
+  </div> 
+</ion-content>

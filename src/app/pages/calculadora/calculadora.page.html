@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Calculadora</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+
+  <ion-card class="bmo">
+    <ion-card-header collapse="condense">
+      <ion-title size="large">BMO</ion-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <div id="container">
+        <ion-grid>
+    
+          <ion-row>
+            <ion-col>
+              <ion-input type="text" value="0" readonly id="display" [(ngModel)]="display"></ion-input>
+            </ion-col>
+          </ion-row>
+    
+          <ion-row>
+            <ion-col><ion-button color="tertiary" (click)="definirOperacao('%')" expand="block"> % </ion-button></ion-col>
+            <ion-col><ion-button color="tertiary" (click)="definirOperacao('V')" expand="block"> V </ion-button></ion-col>
+            <ion-col><ion-button color="tertiary" (click)="definirOperacao('exp')" expand="block"> x² </ion-button></ion-col>
+            <ion-col><ion-button color="tertiary" (click)="definirOperacao('inv')" expand="block"> ¹/x </ion-button></ion-col>
+          </ion-row>
+    
+          <ion-row>
+            <ion-col><ion-button color="danger" (click)="reiniciar()" expand="block"> CE </ion-button></ion-col>
+            <ion-col><ion-button color="tertiary" (click)="reiniciar()" expand="block"> C </ion-button></ion-col>
+            <ion-col><ion-button color="tertiary" (click)="definirOperacao('/')" expand="block"> / </ion-button></ion-col>
+            <ion-col><ion-button color="warning" (click)="apagar()" expand="block"><ion-icon name="caret-back-outline"></ion-icon></ion-button></ion-col>
+          </ion-row>
+    
+          <ion-row>
+            <ion-col><ion-button color="light" (click)="registrarNumero('7')" expand="block"> 7 </ion-button></ion-col>
+            <ion-col><ion-button color="light" (click)="registrarNumero('8')" expand="block"> 8 </ion-button></ion-col>
+            <ion-col><ion-button color="light" (click)="registrarNumero('9')" expand="block"> 9 </ion-button></ion-col>
+            <ion-col><ion-button color="tertiary" (click)="definirOperacao('*')" expand="block"> * </ion-button></ion-col>
+          </ion-row>
+    
+          <ion-row>
+            <ion-col><ion-button color="light" (click)="registrarNumero('4')" expand="block"> 4 </ion-button></ion-col>
+            <ion-col><ion-button color="light" (click)="registrarNumero('5')" expand="block"> 5 </ion-button></ion-col>
+            <ion-col><ion-button color="light" (click)="registrarNumero('6')" expand="block"> 6 </ion-button></ion-col>
+            <ion-col><ion-button color="tertiary" (click)="definirOperacao('-')" expand="block"> - </ion-button></ion-col>
+          </ion-row>
+    
+          <ion-row>
+            <ion-col><ion-button color="light" (click)="registrarNumero('1')" expand="block"> 1 </ion-button></ion-col>
+            <ion-col><ion-button color="light" (click)="registrarNumero('2')" expand="block"> 2 </ion-button></ion-col>
+            <ion-col><ion-button color="light" (click)="registrarNumero('3')" expand="block"> 3 </ion-button></ion-col>
+            <ion-col><ion-button color="tertiary" (click)="definirOperacao('+')" expand="block"> + </ion-button></ion-col>
+          </ion-row>
+    
+          <ion-row>
+            <ion-col><ion-button color="tertiary" (click)="definirOperacao('menosUm')" expand="block"> +/- </ion-button></ion-col>
+            <ion-col><ion-button color="light" (click)="registrarNumero('0')" expand="block"> 0 </ion-button></ion-col>
+            <ion-col><ion-button color="tertiary" (click)="registrarNumero('.')" expand="block"> . </ion-button></ion-col>
+            <ion-col><ion-button color="tertiary" (click)="calcular()" expand="block"> = </ion-button></ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-item >
+      <ion-icon name="alert" slot="start"></ion-icon>
+      <ion-label>*Lembre-se de fazer seu cálculo <br> em partes apertando <b>=</b> entre <br>
+        as operações <ion-icon name="happy-outline"></ion-icon></ion-label>
+    </ion-item>
+  </ion-card>
+ 
+</ion-content>

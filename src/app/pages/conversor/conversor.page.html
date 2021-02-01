@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Conversor de temperatura</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card id="primeiro">
+
+    <ion-card-header>
+      <ion-card-title>De:</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      
+      <ion-item>
+        <ion-label>Unidade:</ion-label>
+        <ion-select [(ngModel)]="unidadeDe" interface="action-sheet">
+          <ion-select-option value="c">Celcius (C°)</ion-select-option>
+          <ion-select-option value="f">Fahrenheit (F°)</ion-select-option>
+          <ion-select-option value="k">Kevin (K)</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Temperatura:</ion-label>
+        <ion-input clearInput required [(ngModel)]="temperaturaDe"></ion-input>
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card id="segundo">
+
+    <ion-card-header>
+      <ion-card-title>Para:</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Unidade:</ion-label>
+        <ion-select [(ngModel)]="unidadePara" interface="action-sheet">
+          <ion-select-option value="c">Celcius (C°)</ion-select-option>
+          <ion-select-option value="f">Fahrenheit (F°)</ion-select-option>
+          <ion-select-option value="k">Kevin (K)</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Temperatura:</ion-label>
+        <ion-input readonly [(ngModel)]="temperaturaPara"></ion-input>
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="primary" (click)="limpar()">Limpar</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="success" (click)="converter()">Converter</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
