@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './calcular-idade.page.html',
   styleUrls: ['./calcular-idade.page.scss'],
 })
+
 export class CalcularIdadePage implements OnInit {
 
   private nascimento: Date;
@@ -65,18 +66,20 @@ export class CalcularIdadePage implements OnInit {
   }
 
   calcularDias(anoNasc: number, bissexto: number){
-    if ((365 - (this.idadeDias % 365)) === 0) { 
+    const diasFaltantes = 365 - (this.idadeDias % 365);
+    if (diasFaltantes === 0) { 
       return 0;
     }
 
     if (anoNasc % 4 === 0) {
-      return 365 - (this.idadeDias % 365) + bissexto - 1;
+      return diasFaltantes + bissexto - 1;
     }
+    
     if (bissexto > 0) {
-      return 365 - (this.idadeDias % 365) + bissexto;
+      return diasFaltantes + bissexto;
     } 
 
-    return 365 - (this.idadeDias % 365);
+    return diasFaltantes;
   }
 
   calcularDiaDaSemana(nasc: Date){
