@@ -21,7 +21,8 @@ export class CalcularIdadePage implements OnInit {
   getDate(): string | Date {
       const date = new Date();
       let max = date.toLocaleString('default', {year: 'numeric', month: 'numeric', day: 'numeric'});
-      max = max.split('/')[2] + '-' + max.split('/')[1] + '-' + max.split('/')[0];
+      const fracao = max.split('/');
+      max = fracao[2] + '-' + fracao[1] + '-' + fracao[0];
       return max;
   }
 
@@ -32,7 +33,7 @@ export class CalcularIdadePage implements OnInit {
           this.calcularAniversario(nasc);
           return;          
       }
-      alert('Insira uma data!');
+      alert('Por favor, insira uma data.');
       return;
   }
 
@@ -40,18 +41,19 @@ export class CalcularIdadePage implements OnInit {
     const dataAtual = new Date();
     const anoNasc = nasc.getFullYear();
     const anoAtual = dataAtual.getFullYear();
-    const bissexto = this.calcularBissexto(anoNasc, anoAtual);
+    const bissexto = this.calcularBissexto(anoNasc);
     this.proximoAniversario = this.calcularDias(anoNasc, bissexto);
-    this.diaDaSemana = this.calcularDiaSemana(nasc, dataAtual);
+    this.diaDaSemana = this.calcularDiaSemana(nasc);
 
   }
 
-  calcularDiaSemana(nasc: Date, dataAtual: Date){
-    const mesNasc = nasc.getMonth();
-    const mesAtual = dataAtual.getMonth();
-    const diaNasc = nasc.getDate();
+  calcularDiaSemana(nasc: Date){
+    const dataAtual = new Date();
     const diaAtual = dataAtual.getDate();
+    const mesAtual = dataAtual.getMonth();
     const anoAtual = dataAtual.getFullYear();
+    const diaNasc = nasc.getDate();
+    const mesNasc = nasc.getMonth();
     let dia: number;
 
     if (mesNasc === mesAtual && diaNasc <= diaAtual) {
@@ -73,13 +75,17 @@ export class CalcularIdadePage implements OnInit {
     return this.diaSemana(dia);
   }
 
-  calcularBissexto(anoNasc: number, anoAtual: number){
+  calcularBissexto(anoNasc: number){
+    const anoAtual = new Date().getFullYear();
+    const j = anoAtual - anoNasc;
     let bissexto = 0;
-    for (let i = 0; i < anoAtual - anoNasc; i++) {
+
+    for (let i = 0; i < j; i++) {
         if ((anoNasc + i) % 4 === 0) {
             bissexto += 1;
         }
     }
+    
     return bissexto;
   }
 
@@ -109,22 +115,22 @@ export class CalcularIdadePage implements OnInit {
   }
 
   diaSemana(day: number): string {
-      switch (day) {
-          case 0:
-              return 'Domingo';
-          case 1:
-              return 'Segunda-feira';
-          case 2:
-              return 'Terça-feira';
-          case 3:
-              return 'Quarta-feira';
-          case 4:
-              return 'Quinta-feira';
-          case 5:
-              return 'Sexta-feira';
-          case 6:
-              return 'Sábado';
-      }
+    switch (day) {
+        case 0:
+            return 'Domingo';
+        case 1:
+            return 'Segunda-feira';
+        case 2:
+            return 'Terça-feira';
+        case 3:
+            return 'Quarta-feira';
+        case 4:
+            return 'Quinta-feira';
+        case 5:
+            return 'Sexta-feira';
+        case 6:
+            return 'Sábado';
+    }
   }
 
   ngOnInit() {
