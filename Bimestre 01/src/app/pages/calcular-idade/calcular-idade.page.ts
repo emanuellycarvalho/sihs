@@ -20,62 +20,91 @@ export class CalcularIdadePage implements OnInit {
   getDate(): string | Date {
     const data = new Date();
     let max = data.toLocaleString('default', {year: 'numeric', month: 'numeric', day: 'numeric'});
-    max = max.split('/')[2] + '-' + max.split('/')[1] + '-' + max.split('/')[0];
+    const fracao = max.split('/');
+    max = fracao[2] + '-' + fracao[1] + '-' + fracao[0];
     return max;
   }
 
-  async calcular(): Promise<void> {
-    if (!isNaN(Number(new Date(this.nascimento)))) {
-      const currentDate = new Date();
-      this.idadeDias = parseInt(String((Number(currentDate) - Number(new Date(this.nascimento))) / (24 * 3600 * 1000)));
-      this.idadeHoras = this.idadeDias * 24;
-      this.idadeMinutos = this.idadeHoras * 60;
-      const anoNasc = new Date(this.nascimento).getFullYear();
-      const anoAtual = (currentDate.getFullYear());
-      let bissexto = 0;
-      for (let i = 0; i < anoAtual - anoNasc; i++) {
-        if ((anoNasc + i) % 4 === 0) {
-          bissexto += 1;
-        }
-      }
-      if ((365 - (this.idadeDias % 365)) === 0) {
-        this.proximoAniversario = 0;
-      } else if (anoNasc % 4 === 0) {
-        this.proximoAniversario = 365 - (this.idadeDias % 365) + bissexto - 1;
-      } else if (bissexto > 0) {
-        this.proximoAniversario = 365 - (this.idadeDias % 365) + bissexto;
-      } else {
-        this.proximoAniversario = 365 - (this.idadeDias % 365);
-      }
-      if (new Date(this.nascimento).getMonth() > currentDate.getMonth()) {
-        this.diaSemana = this.diaDaSemana(new Date(currentDate.getFullYear(), new Date(this.nascimento).getMonth(), new Date(this.nascimento).getDate()).getDay());
-        console.log('aqui');
-      } else if (new Date(this.nascimento).getMonth() === currentDate.getMonth() &&
-          new Date(this.nascimento).getDate() <= currentDate.getDate()) {
-        this.diaSemana = this.diaDaSemana(new Date(currentDate.getFullYear() + 1,
-            currentDate.getMonth(), new Date(this.nascimento).getDate()).getDay());
-        console.log('menor =');
-        console.log(new Date(currentDate.getFullYear() + 1,
-            currentDate.getMonth(), new Date(this.nascimento).getDate()));
-
-      } else if (new Date(this.nascimento).getMonth() === currentDate.getMonth() &&
-          new Date(this.nascimento).getDate() > currentDate.getDate()) {
-        this.diaSemana = this.diaDaSemana(new Date(currentDate.getFullYear(),
-            new Date(this.nascimento).getMonth(), new Date(this.nascimento).getDate()).getDay());
-        console.log(new Date(currentDate.getFullYear(),
-            new Date(this.nascimento).getMonth(), new Date(this.nascimento).getDate()));
-
-      }
-
-      console.log('Anos bissexto: ', bissexto);
-      console.log(365 - (this.idadeDias % 365));
-    } else {
-      alert('Insira uma data!');
+  async calcular(){
+    const nasc = new Date(this.nascimento);
+    if(nasc != null){
+      this.calcularIdade(nasc);
+      this.calcularAniversario(nasc);
+      return;
     }
+    alert('Por favor, insira uma data.');
+    return;
   }
 
-  diaDaSemana(day: number){
-    switch (day) {
+  async calcularAniversario(nasc: Date){
+    const currentDate = new Date();
+    const anoNasc = nasc.getFullYear();
+    const anoAtual = currentDate.getFullYear();
+    const bissexto = this.calcularBissexto(anoAtual, anoNasc);
+    this.proximoAniversario = this.calcularDias(anoNasc, bissexto);
+    this.diaSemana = this.calcularDiaDaSemana(nasc);
+    return;    
+  }
+
+  async calcularIdade(nasc: Date){
+    const currentDate = new Date();
+    this.idadeDias = Number(currentDate) - Number(nasc) / (24 * 3600 * 1000);
+    this.idadeHoras = this.idadeDias * 24;
+    this.idadeMinutos = this.idadeHoras * 60;
+    return;
+  }
+
+  calcularBissexto(anoAtual, anoNasc){
+    let bissexto = 0;
+    for (let i = 0; i < anoAtual - anoNasc; i++) {
+      if ((anoNasc + i) % 4 === 0) {
+        bissexto += 1;
+      }
+    }
+    return bissexto;
+  }
+
+  calcularDias(anoNasc: number, bissexto: number){
+    if ((365 - (this.idadeDias % 365)) === 0) { 
+      return 0;
+    }
+
+    if (anoNasc % 4 === 0) {
+      return 365 - (this.idadeDias % 365) + bissexto - 1;
+    }
+    if (bissexto > 0) {
+      return 365 - (this.idadeDias % 365) + bissexto;
+    } 
+
+    return 365 - (this.idadeDias % 365);
+  }
+
+  calcularDiaDaSemana(nasc: Date){
+    const currentDate = new Date();
+    const anoAtual = currentDate.getFullYear();
+    const mesNasc = new Date(this.nascimento).getMonth();
+    const mesAtual = currentDate.getMonth(); 
+    const dataNasc =  nasc.getDate();
+    const dataAtual = currentDate.getDate();
+    let dia: number;
+    
+    if (mesNasc > mesAtual) {
+      dia = new Date(anoAtual, mesNasc, dataNasc).getDay()
+    } 
+    
+    if (mesNasc === mesAtual && dataNasc <= dataAtual) {
+      dia = new Date(anoAtual + 1, mesAtual, dataNasc).getDay();
+    }
+    
+    if (mesNasc === mesAtual && dataNasc > dataAtual) {
+      dia = new Date(anoAtual, mesNasc, dataNasc).getDay();
+    }
+
+    return this.diaDaSemana(dia);
+  }
+
+  diaDaSemana(dia: number){
+    switch (dia) {
       case 0:
         return 'Domingo';
       case 1:
