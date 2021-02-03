@@ -3,11 +3,47 @@
 
     <ion-header>
       <ion-toolbar>
-        <ion-title routerLink="home">Atividades</ion-title>
+        <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
+
+      <ion-menu-toggle auto-hide="false" >
+        <ion-note></ion-note>
+        <ion-item routerLink="home">
+          <ion-icon name="home-outline" slot="start"></ion-icon>
+          <ion-label>Início</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      
+      <ion-list id="first-list">
+        <ion-list-header>Primeiro Bimestre</ion-list-header>
+        <ion-note></ion-note>
+
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of primeiroBimestre; let i = index">
+          <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
+      <ion-list id="more-list">
+        <ion-list-header>Mais</ion-list-header>
+        <ion-note></ion-note>
+
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of mais; let i = index">
+          <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
+    </ion-content>
+
+    <!-- <ion-content>
       <ion-list>
 
         <ion-item routerLink="calcular-idade">
@@ -35,7 +71,7 @@
         </ion-item>
 
       </ion-list>
-    </ion-content>
+    </ion-content> -->
 
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>

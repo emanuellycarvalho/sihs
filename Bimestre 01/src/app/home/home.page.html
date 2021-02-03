@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Projetos SIHS</ion-title>
+    <ion-title>Início</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
@@ -9,26 +9,11 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-card>
-    <div id="card-content">
-      <ion-card-header>
-        <ion-card-subtitle>Sistemas integrados de Hardware e Software</ion-card-subtitle>
-        <ion-card-title>Projetos</ion-card-title>
-      </ion-card-header>
-    
-      <ion-card-content>
-        Odilon, eu não vou fazer um projeto pra cada atividade porque ocupa espaço demais e eu não uso SSD né gato!?
-        Além disso, fingi que estava com tempo e fui fuçar os recursos do frameworks. <br>
-        Então, tem um menu lateral onde cada página é uma atividade e os bimestres estão identificados pelos badges.
-        Beijos e abraços... <br> pro Neném!
-      </ion-card-content>
-    </div>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-content>
-      <a href="https://github.com/emwnuelly/sihs" target="_blank">Meu repositório de SIHS no GitHub. </a>
-    </ion-card-content>
-  </ion-card>
+  <ion-list id="app-list">
+    <ion-item *ngFor="let p of appPages; let i = index" [routerLink]="[p.url]" detail >
+      <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" [color]="p.color"></ion-icon>
+      <ion-label>{{ p.title }}</ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

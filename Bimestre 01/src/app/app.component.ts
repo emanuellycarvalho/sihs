@@ -10,6 +10,17 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  public primeiroBimestre = [
+    {title: 'Calculadora de Idade', url: 'calcular-idade', icon:'calendar'},
+    {title: 'Calculadora', url: 'calculadora', icon:'calculator'},
+    {title: 'Conversor', url: 'conversor', icon:'thermometer'},
+    {title: 'Verificar número', url: 'verificar-numero', icon:'trail-sign'},
+  ];
+  
+  public mais = [
+    {title: 'Sobre', url: 'sobre', icon:'information-circle'},
+  ];
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'calcular-idade',
     loadChildren: () => import('./pages/calcular-idade/calcular-idade.module').then( m => m.CalcularIdadePageModule)
   },
+  {
+    path: 'sobre',
+    loadChildren: () => import('./pages/sobre/sobre.module').then( m => m.SobrePageModule)
+  },
 ];
 
 @NgModule({
