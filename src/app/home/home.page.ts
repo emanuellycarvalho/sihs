@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class HomePage {
   public appPages = [
     //segundo bimesntre
-    {title: 'Gerenciador de Pessoas', url: 'pessoas', icon:'people', color: 'warning'},
+    {title: 'Gerenciador de Pessoas', url: '../pessoas', icon:'people', color: 'warning'},
 
     //primeiro bimestre
     {title: 'Calculadora de Idade', url: '../calcular-idade', icon:'calendar', color: 'tertiary'},

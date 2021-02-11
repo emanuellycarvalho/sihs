@@ -1,9 +1,62 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>pessoa-add</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>Adicionar Pessoa</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="pessoas"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <form (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="pessoa.nome" name="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Data Nascimento</ion-label>
+      <ion-datetime doneText="Confirmar" cancelText="Cancelar" displayFormat="DD/MM/YYYY" [(ngModel)]="pessoa.dataNascimento" name="dataNascimento"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">CPF</ion-label>
+      <ion-input type="text" [(ngModel)]="pessoa.cpf"  name="cpf"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input type="text" [(ngModel)]="pessoa.telefone" name="telefone"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">CEP</ion-label>
+            <ion-input type="text" [(ngModel)]="pessoa.cep" name="cep" (ionBlur)="preencherEndereco()"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Número</ion-label>
+            <ion-input type="text" [(ngModel)]="pessoa.num" name="numero"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item>
+      <ion-label position="floating">Rua</ion-label>
+      <ion-input type="text" [(ngModel)]="pessoa.rua" name="rua" readonly></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Bairro</ion-label>
+      <ion-input type="text" [(ngModel)]="pessoa.bairro" name="bairro" readonly></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Cidade</ion-label>
+      <ion-input type="text" [(ngModel)]="pessoa.cidade" name="cidade" readonly></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Estado</ion-label>
+      <ion-input type="text" [(ngModel)]="pessoa.estado" name="estado" readonly></ion-input>
+    </ion-item>
+    <ion-button type="submit" expand="block" color="primary">Salvar</ion-button>
+  </form> 
 </ion-content>
