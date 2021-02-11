@@ -16,6 +16,18 @@
           <ion-label>Início</ion-label>
         </ion-item>
       </ion-menu-toggle>
+
+      <ion-list id="second-list">
+        <ion-list-header>Segundo Bimestre</ion-list-header>
+        <ion-note></ion-note>
+
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of segundoBimestre; let i = index">
+          <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" color="warning"></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
       
       <ion-list id="first-list">
         <ion-list-header>Primeiro Bimestre</ion-list-header>
@@ -23,7 +35,7 @@
 
         <ion-menu-toggle auto-hide="false" *ngFor="let p of primeiroBimestre; let i = index">
           <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" color="tertiary"></ion-icon>
             <ion-label>{{ p.title }}</ion-label>
           </ion-item>
         </ion-menu-toggle>
@@ -42,36 +54,6 @@
       </ion-list>
 
     </ion-content>
-
-    <!-- <ion-content>
-      <ion-list>
-
-        <ion-item routerLink="calcular-idade">
-          <ion-icon name="calendar-outline" slot="start"></ion-icon>
-          <ion-label>Calculadora de Idade<ion-icon name="bug-outline"></ion-icon></ion-label>
-          <ion-badge color="danger">Avaliativa</ion-badge>
-        </ion-item>
-
-        <ion-item routerLink="calculadora">
-          <ion-icon name="calculator-outline" slot="start"></ion-icon>
-          <ion-label>Calculadora<ion-icon name="bug-outline"></ion-icon></ion-label>
-          <ion-badge color="danger">1º</ion-badge>
-        </ion-item>
-
-        <ion-item routerLink="conversor">
-          <ion-icon name="thermometer-outline" slot="start"></ion-icon>
-          <ion-label>Conversor</ion-label>
-          <ion-badge color="danger">1º</ion-badge>
-        </ion-item>
-
-        <ion-item routerLink="verificar-numero">
-          <ion-icon name="trail-sign-outline" slot="start"></ion-icon>
-          <ion-label>Verificar número</ion-label>
-          <ion-badge color="danger">1º</ion-badge>
-        </ion-item>
-
-      </ion-list>
-    </ion-content> -->
 
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>

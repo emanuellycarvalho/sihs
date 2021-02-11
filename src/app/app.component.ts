@@ -16,6 +16,10 @@ export class AppComponent {
     {title: 'Conversor', url: 'conversor', icon:'thermometer'},
     {title: 'Verificar número', url: 'verificar-numero', icon:'trail-sign'},
   ];
+
+  public segundoBimestre = [
+    {title: 'Gerenciador de Pessoas', url: 'pessoas', icon:'people'},
+  ];
   
   public mais = [
     {title: 'Sobre', url: 'sobre', icon:'information-circle'},
