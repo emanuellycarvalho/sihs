@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class HomePage {
   public appPages = [
     //segundo bimesntre
+    {title: 'Gerenciador de Contas', url: '../gerenciador-contas', icon:'receipt', color: 'warning'},
     {title: 'Gerenciador de Pessoas', url: '../pessoas', icon:'people', color: 'warning'},
 
     //primeiro bimestre

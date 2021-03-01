@@ -18,6 +18,7 @@ export class AppComponent {
   ];
 
   public segundoBimestre = [
+    {title: 'Gerenciador de Contas', url: 'gerenciador-contas', icon:'receipt'},
     {title: 'Gerenciador de Pessoas', url: 'pessoas', icon:'people'},
   ];
   

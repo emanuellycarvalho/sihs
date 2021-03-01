@@ -43,6 +43,14 @@ const routes: Routes = [
     path: 'pessoa-add/:id',
     loadChildren: () => import('./pages/02/pessoa-add/pessoa-add.module').then( m => m.PessoaAddPageModule)
   },
+  {
+    path: 'gerenciador-contas',
+    loadChildren: () => import('./pages/02/gerenciador-contas/gerenciador-contas.module').then( m => m.GerenciadorContasPageModule)
+  },
+  {
+    path: 'contas',
+    loadChildren: () => import('./pages/02/contas/contas.module').then( m => m.ContasPageModule)
+  },
 ];
 
 @NgModule({
