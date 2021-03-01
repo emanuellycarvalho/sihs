@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>Registrar conta</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="contas"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form (ngSubmit)="submitForm()">
+
+    <ion-input type="hidden" [(ngModel)]="conta.user"  name="user"></ion-input>
+
+    <ion-item>
+      <ion-label>Tipo</ion-label>
+      <ion-select interface="popover">
+        <ion-item-sliding *ngFor="let tipo of tipos">
+          <ion-select-option value="{{tipo.id}}">{{tipo.nome}}</ion-select-option>
+        </ion-item-sliding>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Valor</ion-label>
+      <ion-input type="text" [(ngModel)]="conta.valor"  name="valor"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Pago</ion-label>
+      <ion-toggle slot="start" [(ngModel)]="conta.situacao" name="situacao" color="success"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descrição</ion-label>
+      <ion-input type="text" [(ngModel)]="conta.descricao" name="descricao"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Data de vencimento</ion-label>
+      <ion-datetime doneText="Confirmar" cancelText="Cancelar" displayFormat="DD/MM/YYYY" [(ngModel)]="conta.vencimento" name="vencimento"></ion-datetime>
+    </ion-item>
+    
+    <ion-button type="submit" expand="block" color="primary">Salvar</ion-button>
+  </form> 
+</ion-content>

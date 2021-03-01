@@ -11,7 +11,7 @@
 
   <ion-list>
     <ion-item-sliding *ngFor="let pessoa of pessoas">
-      <ion-item [routerLink]="'/add-pessoa/' + pessoa.id" detail>
+      <ion-item [routerLink]="'/pessoa-add/' + pessoa.id" detail>
         <ion-label>{{pessoa.nome}}</ion-label>
       </ion-item>
       <ion-item-options side="start">
