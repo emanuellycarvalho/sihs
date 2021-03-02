@@ -29,12 +29,17 @@ export class ContaAddPage implements OnInit {
 
   async registrarConta(){
     this.contas = JSON.parse(localStorage.getItem('contaDB'));
-    for(let i = 0; i < this.tipos.length; i++){
-      if(this.conta.tipo === this.tipos[i].id){
-        this.conta.tipo = this.tipos[i];
-      }
-    }
     
+    if(this.conta.vencimento == null){
+      this.conta.vencimento = "Sem data";
+    }
+
+    if(this.conta.situacao == null){
+      this.conta.situacao = "Pendente";
+    } else {
+      this.conta.situacao = "Pago";
+    }
+
     if(this.id){
       this.contas[this.id] = this.conta;
     } else {
@@ -65,19 +70,21 @@ export class ContaAddPage implements OnInit {
     let pessoas = JSON.parse(localStorage.getItem('pessoaDB'));
     if(pessoas != null){
       let id = JSON.parse(localStorage.getItem('auth'));
+
       if(id != null){
-        for(let i = 0; i < pessoas.length; i ++){
-          let pessoa = pessoas[i];
-          if(id === pessoa.id){
-            this.conta.user = id;
+        for(let i = 0; i < pessoas.length; i++){
+
+          if(id === pessoas[i].id){
+            this.conta.user = pessoas[i].id;
             return; 
           } 
+
         }
       }
+
     }
 
     localStorage.setItem('auth', null);
-
     this.navController.navigateBack('/gerenciador-contas'); 
   }
 

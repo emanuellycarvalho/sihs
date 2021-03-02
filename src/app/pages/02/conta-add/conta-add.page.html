@@ -16,8 +16,8 @@
       <ion-card-content>
         <ion-item>
           <ion-label>Tipo</ion-label>
-          <ion-select multiple="false" interface="popover">
-            <ion-select-option *ngFor="let tipo of tipos">{{tipo.nome}}</ion-select-option>
+          <ion-select multiple="false" interface="popover" [(ngModel)]="conta.tipo" name="tipo">
+            <ion-select-option *ngFor="let tipo of tipos" value={{tipo.nome}} >{{tipo.nome}}</ion-select-option>
           </ion-select>
         </ion-item>
     

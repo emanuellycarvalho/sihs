@@ -8,7 +8,7 @@ import { NavController } from '@ionic/angular';
 })
 export class ContasPage implements OnInit {
   contas: any [] = []; 
-  user: number;
+  user: number; 
 
   constructor(private navController: NavController) { }
 
@@ -21,21 +21,6 @@ export class ContasPage implements OnInit {
       localStorage.setItem('contaDB', JSON.stringify(this.contas));
     }  
     
-    let contas: any [];
-    if(this.contas != null){
-      for(let i = 0; i < this.contas.length; i++){
-        if(this.contas[i].user === this.user){
-          if(contas == null){
-            contas[0] = this.contas[i];
-          } else {
-            contas.push(this.contas[i]);
-          }
-        }
-      }
-    } 
-
-    this.contas = contas;
-
     console.log(this.contas);
   }
 
