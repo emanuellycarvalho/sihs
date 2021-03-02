@@ -32,6 +32,7 @@ export class GerenciadorContasPage implements OnInit {
       let pessoa = this.pessoas[i];
       if(pessoa.cpf === this.cpf && pessoa.telefone === this.telefone){
         localStorage.setItem('auth', pessoa.id);
+        this.navController.navigateBack('/contas'); //se tem, redireciona
       }
     }
   }

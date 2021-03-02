@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="dark">
+  <ion-toolbar>
     <ion-title>Registrar conta</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="contas"></ion-back-button>
@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form (ngSubmit)="submitForm()">
+  <form (ngSubmit)="registrarConta()">
 
     <ion-input type="hidden" [(ngModel)]="conta.user"  name="user"></ion-input>
 
@@ -16,7 +16,7 @@
       <ion-label>Tipo</ion-label>
       <ion-select interface="popover">
         <ion-item-sliding *ngFor="let tipo of tipos">
-          <ion-select-option value="{{tipo.id}}">{{tipo.nome}}</ion-select-option>
+          <ion-select-option>{{tipo.nome}}</ion-select-option>
         </ion-item-sliding>
       </ion-select>
     </ion-item>
@@ -43,4 +43,6 @@
     
     <ion-button type="submit" expand="block" color="primary">Salvar</ion-button>
   </form> 
+    <!-- <ion-button expand="block" color="primary" [router-link]="/tipos-add">Novo tipo</ion-button> -->
+
 </ion-content>

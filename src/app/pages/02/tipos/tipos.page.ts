@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-contas',
-  templateUrl: './contas.page.html',
-  styleUrls: ['./contas.page.scss'],
+  selector: 'app-tipos',
+  templateUrl: './tipos.page.html',
+  styleUrls: ['./tipos.page.scss'],
 })
-export class ContasPage implements OnInit {
-  contas: any [] = []; 
+export class TiposPage implements OnInit {
+  tipos: any [] = [];
   user: number;
 
   constructor(private navController: NavController) { }
@@ -15,16 +15,12 @@ export class ContasPage implements OnInit {
   async ionViewWillEnter() {
     this.auth();
     
-    let contas = JSON.parse(localStorage.getItem('contasDB'));
-    if(contas != null){
-      for(let i = 0; i < contas.length; i++){
-        if(contas[i].user === this.user){
-          this.contas.push(contas[i]);
-        }
-      }
+    let tipos = JSON.parse(localStorage.getItem('tiposDB'));
+    if(tipos != null){
+      this.tipos = tipos;
     } 
   }
-
+ 
   async auth(){ //confere se tá logado
     let pessoas = JSON.parse(localStorage.getItem('pessoaDB'));
     if(pessoas != null){
@@ -46,6 +42,6 @@ export class ContasPage implements OnInit {
   }
 
   ngOnInit() {
-  }
+  } 
 
 }

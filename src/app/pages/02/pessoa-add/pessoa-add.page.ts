@@ -60,7 +60,8 @@ export class PessoaAddPage implements OnInit {
     }
 
     localStorage.setItem('pessoaDB', JSON.stringify(this.pessoas));
-    this.navController.navigateBack('/gerenciador-contas');
+    localStorage.setItem('auth', this.pessoa.id);
+    this.navController.navigateBack('/conta-add');
   }
 
   ngOnInit() {

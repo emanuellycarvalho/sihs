@@ -24,16 +24,15 @@ export class ContaAddPage implements OnInit {
 
   async ionViewWillEnter() {
     this.auth();
-
-    this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
-    if(!this.tipos){
-      this.tipos = []
-      localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
-    } 
   }
 
-  async submitForm(){
+  async registrarConta(){
     this.contas = JSON.parse(localStorage.getItem('contaDB'));
+    for(let i = 0; i < this.tipos.length; i++){
+      if(this.conta.tipo === this.tipos[i].id){
+        this.conta.tipo = this.tipos[i];
+      }
+    }
     
     if(this.id){
       this.contas[this.id] = this.conta;
@@ -66,6 +65,11 @@ export class ContaAddPage implements OnInit {
   }
 
   ngOnInit() {
+    this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
+    if(!this.tipos){
+      this.tipos = []
+      localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
+    } 
   }
  
 }
