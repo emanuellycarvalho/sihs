@@ -42,6 +42,11 @@ export class TiposPage implements OnInit {
     this.navController.navigateBack('/gerenciador-contas'); 
   }
 
+  async logout(){
+    localStorage.setItem('auth', null);
+    this.navController.navigateBack('/gerenciador-contas'); 
+  }
+  
   ngOnInit() {
   } 
 

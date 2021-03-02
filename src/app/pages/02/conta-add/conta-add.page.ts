@@ -17,6 +17,8 @@ export class ContaAddPage implements OnInit {
     tipo: null,
     valor: null,
     situacao: null,
+    cor: null,
+    icon: null,
     descricao: null,
     vencimento: null
   }
@@ -29,15 +31,28 @@ export class ContaAddPage implements OnInit {
 
   async registrarConta(){
     this.contas = JSON.parse(localStorage.getItem('contaDB'));
-    
+  
+    if(this.conta.valor.indexOf(",") == -1){
+      this.conta.valor += ",00";
+    }
+
     if(this.conta.vencimento == null){
       this.conta.vencimento = "Sem data";
+    } else {
+      let data = this.conta.vencimento.substring(0, 10);
+      let array = data.split('-');
+      data = array[2] + "/" + array[1] + "/" + array[0];
+      this.conta.vencimento = data;
     }
 
     if(this.conta.situacao == null){
       this.conta.situacao = "Pendente";
+      this.conta.icon = "wallet";
+      this.conta.cor = "primary";
     } else {
       this.conta.situacao = "Pago";
+      this.conta.icon = "checkmark";
+      this.conta.cor = "success";
     }
 
     if(this.id){
