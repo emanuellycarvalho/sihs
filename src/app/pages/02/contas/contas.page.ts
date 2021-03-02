@@ -15,14 +15,28 @@ export class ContasPage implements OnInit {
   async ionViewWillEnter() {
     this.auth();
     
-    let contas = JSON.parse(localStorage.getItem('contasDB'));
-    if(contas != null){
-      for(let i = 0; i < contas.length; i++){
-        if(contas[i].user === this.user){
-          this.contas.push(contas[i]);
+    this.contas = JSON.parse(localStorage.getItem('contaDB'));
+    if(!this.contas){
+      this.contas = []
+      localStorage.setItem('contaDB', JSON.stringify(this.contas));
+    }  
+    
+    let contas: any [];
+    if(this.contas != null){
+      for(let i = 0; i < this.contas.length; i++){
+        if(this.contas[i].user === this.user){
+          if(contas == null){
+            contas[0] = this.contas[i];
+          } else {
+            contas.push(this.contas[i]);
+          }
         }
       }
     } 
+
+    this.contas = contas;
+
+    console.log(this.contas);
   }
 
   async auth(){ //confere se tá logado

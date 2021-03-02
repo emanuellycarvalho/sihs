@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tipos-add',
@@ -14,21 +15,11 @@ export class TiposAddPage implements OnInit {
     nome: null
   };
 
-  constructor(private navController: NavController) { }
+  constructor(private navController: NavController, private activatedRoute: ActivatedRoute) { }
 
   async ionViewWillEnter() {
     this.auth();
-
-    this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
-    
-    if(this.tipos === null){
-      this.tipos = [];
-      this.id = 0;
-      localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
-    } else {
-      this.id = this.tipos.length;
-    }
-  }
+  } 
 
   async cadastrarTipo() {
     this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
@@ -63,7 +54,19 @@ export class TiposAddPage implements OnInit {
   }
 
   ngOnInit() {
+    this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
+    if(!this.tipos){
+      this.tipos = [];
+      localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
+    } 
     
+    this.activatedRoute.params.subscribe((tipo: any) => { //vê se tem um id no get
+      if(tipo.id){
+        this.tipo = this.tipos[this.id];
+      } else {
+        this.tipo.id = this.tipos.length;
+      }
+    }); 
   }
 
 }

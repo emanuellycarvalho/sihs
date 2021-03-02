@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -10,7 +11,7 @@ export class ContaAddPage implements OnInit {
   tipos: any[] = [];
   contas: any[] = [];
   id: number;
-  conta:{
+  conta = {
     id: null,
     user: null,
     tipo: null,
@@ -20,7 +21,7 @@ export class ContaAddPage implements OnInit {
     vencimento: null
   }
 
-  constructor(private navController: NavController) { }
+  constructor(private navController: NavController, private activatedRoute: ActivatedRoute) { }
 
   async ionViewWillEnter() {
     this.auth();
@@ -51,7 +52,13 @@ export class ContaAddPage implements OnInit {
       localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
     } 
 
-    console.log(this.tipos);
+    this.activatedRoute.params.subscribe((conta: any) => { //vê se tem um id no get
+      if(conta.id){
+        this.conta = this.contas[this.id];
+      } else {
+        this.conta.id = this.contas.length;
+      }
+    });
   }
  
   async auth(){ //confere se tá logado

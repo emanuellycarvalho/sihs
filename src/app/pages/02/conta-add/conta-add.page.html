@@ -10,13 +10,13 @@
 <ion-content [fullscreen]="true">
   <form (ngSubmit)="registrarConta()">
 
-    <ion-input type="hidden" [(ngModel)]="conta.user"  name="user"></ion-input>
+    <ion-input type="hidden" [(ngModel)]="conta.user" name="user"></ion-input>
 
     <ion-card>
       <ion-card-content>
         <ion-item>
           <ion-label>Tipo</ion-label>
-          <ion-select interface="popover">
+          <ion-select multiple="false" interface="popover">
             <ion-select-option *ngFor="let tipo of tipos">{{tipo.nome}}</ion-select-option>
           </ion-select>
         </ion-item>

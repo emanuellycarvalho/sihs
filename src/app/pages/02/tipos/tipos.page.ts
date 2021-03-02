@@ -17,7 +17,7 @@ export class TiposPage implements OnInit {
     
     this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
     if(!this.tipos){
-      this.tipos = []
+      this.tipos = [];
       localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
     } 
   }
