@@ -13,11 +13,12 @@ export class TiposPage implements OnInit {
   constructor(private navController: NavController) { }
 
   async ionViewWillEnter() {
-    this.auth();
+    this.auth(); 
     
-    let tipos = JSON.parse(localStorage.getItem('tiposDB'));
-    if(tipos != null){
-      this.tipos = tipos;
+    this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
+    if(!this.tipos){
+      this.tipos = []
+      localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
     } 
   }
  

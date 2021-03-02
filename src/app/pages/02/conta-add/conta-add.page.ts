@@ -43,7 +43,17 @@ export class ContaAddPage implements OnInit {
     localStorage.setItem('contaDB', JSON.stringify(this.contas));
     this.navController.navigateBack('/contas');
   }
-  
+
+  ngOnInit() {
+    this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
+    if(this.tipos == null){
+      this.tipos = [];
+      localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
+    } 
+
+    console.log(this.tipos);
+  }
+ 
   async auth(){ //confere se tá logado
     let pessoas = JSON.parse(localStorage.getItem('pessoaDB'));
     if(pessoas != null){
@@ -54,7 +64,7 @@ export class ContaAddPage implements OnInit {
           if(id === pessoa.id){
             this.conta.user = id;
             return; 
-          }
+          } 
         }
       }
     }
@@ -64,12 +74,4 @@ export class ContaAddPage implements OnInit {
     this.navController.navigateBack('/gerenciador-contas'); 
   }
 
-  ngOnInit() {
-    this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
-    if(!this.tipos){
-      this.tipos = []
-      localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
-    } 
-  }
- 
 }

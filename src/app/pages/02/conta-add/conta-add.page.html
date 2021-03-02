@@ -12,36 +12,40 @@
 
     <ion-input type="hidden" [(ngModel)]="conta.user"  name="user"></ion-input>
 
-    <ion-item>
-      <ion-label>Tipo</ion-label>
-      <ion-select interface="popover">
-        <ion-item-sliding *ngFor="let tipo of tipos">
-          <ion-select-option>{{tipo.nome}}</ion-select-option>
-        </ion-item-sliding>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Valor</ion-label>
-      <ion-input type="text" [(ngModel)]="conta.valor"  name="valor"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Pago</ion-label>
-      <ion-toggle slot="start" [(ngModel)]="conta.situacao" name="situacao" color="success"></ion-toggle>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Descrição</ion-label>
-      <ion-input type="text" [(ngModel)]="conta.descricao" name="descricao"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Data de vencimento</ion-label>
-      <ion-datetime doneText="Confirmar" cancelText="Cancelar" displayFormat="DD/MM/YYYY" [(ngModel)]="conta.vencimento" name="vencimento"></ion-datetime>
-    </ion-item>
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Tipo</ion-label>
+          <ion-select interface="popover">
+            <ion-select-option *ngFor="let tipo of tipos">{{tipo.nome}}</ion-select-option>
+          </ion-select>
+        </ion-item>
     
-    <ion-button type="submit" expand="block" color="primary">Salvar</ion-button>
+        <ion-item>
+          <ion-label position="floating">Valor</ion-label>
+          <ion-input type="text" [(ngModel)]="conta.valor"  name="valor"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Pago</ion-label>
+          <ion-toggle slot="start" [(ngModel)]="conta.situacao" name="situacao" color="success"></ion-toggle>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label position="floating">Descrição</ion-label>
+          <ion-input type="text" [(ngModel)]="conta.descricao" name="descricao"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label position="floating">Data de vencimento</ion-label>
+          <ion-datetime doneText="Selecionar" cancelText="Fechar" displayFormat="DD/MM/YYYY" [(ngModel)]="conta.vencimento" name="vencimento"></ion-datetime>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card>
+      <ion-button type="submit" expand="block" color="primary">Salvar</ion-button>
+    </ion-card>
   </form> 
     <!-- <ion-button expand="block" color="primary" [router-link]="/tipos-add">Novo tipo</ion-button> -->
 
