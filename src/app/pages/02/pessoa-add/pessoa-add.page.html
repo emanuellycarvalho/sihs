@@ -11,52 +11,52 @@
   <form (ngSubmit)="submitForm()">
     <ion-item>
       <ion-label position="floating">Nome</ion-label>
-      <ion-input type="text" [(ngModel)]="pessoa.nome" name="nome"></ion-input>
+      <ion-input type="text" formControlName="nome"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Data Nascimento</ion-label>
-      <ion-datetime doneText="Confirmar" cancelText="Cancelar" displayFormat="DD/MM/YYYY" [(ngModel)]="pessoa.dataNascimento" name="dataNascimento"></ion-datetime>
+      <ion-datetime doneText="Confirmar" cancelText="Cancelar" displayFormat="DD/MM/YYYY" formControlName="dataNascimento"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label position="floating">CPF</ion-label>
-      <ion-input type="text" [(ngModel)]="pessoa.cpf"  name="cpf"></ion-input>
+      <ion-input type="text" formControlName="cpf" [brmasker]="{mask: '999.999.999-12'}" maxLength=14></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Telefone</ion-label>
-      <ion-input type="text" [(ngModel)]="pessoa.telefone" name="telefone"></ion-input>
+      <ion-input type="text" formControlName="telefone" [brmasker]="{mask: '(99) 99999-9999'}" maxLength=15></ion-input>
     </ion-item>
     <ion-grid>
       <ion-row>
         <ion-col>
           <ion-item>
             <ion-label position="floating">CEP</ion-label>
-            <ion-input type="text" [(ngModel)]="pessoa.cep" name="cep" (ionBlur)="preencherEndereco()"></ion-input>
+            <ion-input type="text" formControlName="cep" (ionBlur)="preencherEndereco()" [brmasker]="{mask: '999999-999'}" maxLength=9></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label position="floating">Número</ion-label>
-            <ion-input type="text" [(ngModel)]="pessoa.num" name="numero"></ion-input>
+            <ion-input type="text" formControlName="numero"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
     <ion-item>
       <ion-label position="floating">Rua</ion-label>
-      <ion-input type="text" [(ngModel)]="pessoa.rua" name="rua" readonly></ion-input>
+      <ion-input type="text" formControlName="rua" readonly></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Bairro</ion-label>
-      <ion-input type="text" [(ngModel)]="pessoa.bairro" name="bairro" readonly></ion-input>
+      <ion-input type="text" formControlName="bairro" readonly></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Cidade</ion-label>
-      <ion-input type="text" [(ngModel)]="pessoa.cidade" name="cidade" readonly></ion-input>
+      <ion-input type="text" formControlName="cidade" readonly></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Estado</ion-label>
-      <ion-input type="text" [(ngModel)]="pessoa.estado" name="estado" readonly></ion-input>
+      <ion-input type="text" formControlName="estado" readonly></ion-input>
     </ion-item>
-    <ion-button type="submit" expand="block" color="primary">Salvar</ion-button>
+    <ion-button type="submit" expand="block" color="primary" [disabled]="!formGroup.valid">Salvar</ion-button>
   </form> 
 </ion-content>
