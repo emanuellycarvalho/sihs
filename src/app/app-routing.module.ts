@@ -39,29 +39,33 @@ const routes: Routes = [
     path: 'pessoa-add',
     loadChildren: () => import('./pages/02/pessoa-add/pessoa-add.module').then( m => m.PessoaAddPageModule)
   },
-  {
+  /* {
     path: 'pessoa-add/:id',
     loadChildren: () => import('./pages/02/pessoa-add/pessoa-add.module').then( m => m.PessoaAddPageModule)
-  },
+  }, */
   {
     path: 'gerenciador-contas',
-    loadChildren: () => import('./pages/02/gerenciador-contas/gerenciador-contas.module').then( m => m.GerenciadorContasPageModule)
+    loadChildren: () => import('./pages/02/conta-gerenciador/gerenciador-contas/gerenciador-contas.module').then( m => m.GerenciadorContasPageModule)
   },
   {
     path: 'contas',
-    loadChildren: () => import('./pages/02/contas/contas.module').then( m => m.ContasPageModule)
+    loadChildren: () => import('./pages/02/conta-gerenciador/contas/contas.module').then( m => m.ContasPageModule)
   },
   {
     path: 'conta-add',
-    loadChildren: () => import('./pages/02/conta-add/conta-add.module').then( m => m.ContaAddPageModule)
+    loadChildren: () => import('./pages/02/conta-gerenciador/conta-add/conta-add.module').then( m => m.ContaAddPageModule)
   },
   {
     path: 'tipos',
-    loadChildren: () => import('./pages/02/tipos/tipos.module').then( m => m.TiposPageModule)
+    loadChildren: () => import('./pages/02/conta-gerenciador/tipos/tipos.module').then( m => m.TiposPageModule)
   },
   {
     path: 'tipos-add',
-    loadChildren: () => import('./pages/02/tipos-add/tipos-add.module').then( m => m.TiposAddPageModule)
+    loadChildren: () => import('./pages/02/conta-gerenciador/tipos-add/tipos-add.module').then( m => m.TiposAddPageModule)
+  },
+  {
+    path: 'cadastro',
+    loadChildren: () => import('./pages/02/conta-gerenciador/cadastro/cadastro.module').then( m => m.CadastroPageModule)
   },
 ];
 

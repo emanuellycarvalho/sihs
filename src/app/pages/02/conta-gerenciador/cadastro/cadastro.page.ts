@@ -1,27 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import {CepService} from 'src/app/services/cep.service';
+import { CepService } from 'C:/Projects Ionic/sihs/src/app/services/cep.service';
 import { ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PessoaService } from 'src/app/services/pessoa.service';
-import { Pessoa} from 'src/app/models/pessoa';
-import { Endereco} from 'src/app/interfaces/endereco';
-
+import { PessoaService } from 'C:/Projects Ionic/sihs/src/app/services/pessoa.service';
+import { Pessoa } from 'C:/Projects Ionic/sihs/src/app/models/pessoa'; 
+import { Endereco } from 'C:/Projects Ionic/sihs/src/app/interfaces/endereco';
+import { FormsModule } from '@angular/forms'  
+import { ReactiveFormsModule} from '@angular/forms'
 
 @Component({
-  selector: 'app-pessoa-add',
-  templateUrl: './pessoa-add.page.html',
-  styleUrls: ['./pessoa-add.page.scss'],
+  selector: 'app-cadastro',
+  templateUrl: './cadastro.page.html',
+  styleUrls: ['./cadastro.page.scss'],
 })
-export class PessoaAddPage implements OnInit {
+export class CadastroPage implements OnInit {
+
   pessoa: Pessoa;
   endereco: Endereco;
 
   public formGroup: FormGroup;
 
   constructor(private activatedRoute: ActivatedRoute, private navController: NavController, private cepService: CepService,
-            public toastController: ToastController, private formBuilder: FormBuilder, private pessoaService: PessoaService){ 
+            public toastController: ToastController, private formBuilder: FormBuilder, private pessoaService: PessoaService,
+            private formsModule: FormsModule, private reactiveFM: ReactiveFormsModules){ 
+
     this.formGroup = this.formBuilder.group({
       'nome':['', Validators.compose([
         Validators.required,
@@ -127,4 +131,5 @@ export class PessoaAddPage implements OnInit {
     });
     toast.present();
   }
+
 }
