@@ -20,7 +20,7 @@ export class ContaAddPage implements OnInit {
   constructor(
     private navController: NavController, 
     private activatedRoute: ActivatedRoute,
-    public toastController: ToastController,) { }
+    public toastController: ToastController) { }
 
   async ionViewWillEnter() {
     this.auth();
@@ -100,21 +100,19 @@ export class ContaAddPage implements OnInit {
   }
 
   async auth(){ //confere se tá logado
-    let pessoas = JSON.parse(localStorage.getItem('pessoaDB'));
-    if(pessoas != null){
+    let users = JSON.parse(localStorage.getItem('userDB'));
+    if(users != null){
       let id = JSON.parse(localStorage.getItem('auth'));
 
       if(id != null){
-        for(let i = 0; i < pessoas.length; i++){
+        for(let i = 0; i < users.length; i++){
 
-          if(id === pessoas[i].id){
-            this.conta.user = pessoas[i].id;
+          if(id === users[i].id){
+            this.conta.user = users[i].id;
             return; 
           } 
-
         }
       }
-
     }
 
     localStorage.setItem('auth', null);

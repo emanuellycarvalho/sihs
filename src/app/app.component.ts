@@ -4,6 +4,9 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -29,7 +32,9 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private navController: NavController,
+    public toastController: ToastController
   ) {
     this.initializeApp();
   }
@@ -40,5 +45,32 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  /* async auth(){ //confere se tá logado
+    const users = JSON.parse(localStorage.getItem('userDB'));
+    if(users != null){
+      const id = JSON.parse(localStorage.getItem('auth'));
+      if(id != null){
+        for(let i = 0; i < users.length; i++){
+          if(id == users[i].id){
+            return; 
+          } 
+        }
+      }
+    }
+
+    localStorage.setItem('auth', null);
+    this.exibirMensagem("Por favor, realize o login para continuar.");
+    this.navController.navigateBack('/gerenciador-contas'); 
+  }
   
+
+  async exibirMensagem(mensagem: string) {
+    const toast = await this.toastController.create({
+      message: mensagem,
+      duration: 1500
+    });
+    toast.present();
+  }  */
+
 }

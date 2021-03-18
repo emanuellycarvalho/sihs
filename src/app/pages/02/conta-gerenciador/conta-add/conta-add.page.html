@@ -8,37 +8,37 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form (ngSubmit)="registrarConta()">
+  <form [formGroup]="cadastro" (ngSubmit)="registrarConta()"> 
 
-    <ion-input type="hidden" [(ngModel)]="conta.user" name="user"></ion-input>
+    <ion-input type="hidden" formControlName="user" name="user"></ion-input>
 
     <ion-card>
       <ion-card-content>
         <ion-item>
           <ion-label>Tipo</ion-label>
-          <ion-select multiple="false" interface="popover" [(ngModel)]="tipo" name="tipo">
+          <ion-select multiple="false" interface="popover" formControlName="tipo" name="tipo">
             <ion-select-option *ngFor="let tipo of tipos" value={{tipo.id}} >{{tipo.nome}}</ion-select-option>
           </ion-select>
         </ion-item>
     
         <ion-item>
           <ion-label position="floating">Valor</ion-label>
-          <ion-input type="text" [(ngModel)]="conta.valor"  name="valor"></ion-input>
+          <ion-input type="text" formControlName="valor"  name="valor"></ion-input>
         </ion-item>
     
         <ion-item>
           <ion-label>Pago</ion-label>
-          <ion-toggle slot="start" [(ngModel)]="conta.situacao" name="situacao" color="success"></ion-toggle>
+          <ion-toggle slot="start" formControlName="situacao" name="situacao" color="success"></ion-toggle>
         </ion-item>
     
         <ion-item>
           <ion-label position="floating">Descrição</ion-label>
-          <ion-input type="text" [(ngModel)]="conta.descricao" name="descricao"></ion-input>
+          <ion-input type="text" formControlName="descricao" name="descricao"></ion-input>
         </ion-item>
     
         <ion-item>
           <ion-label position="floating">Data de vencimento</ion-label>
-          <ion-datetime doneText="Selecionar" cancelText="Fechar" displayFormat="DD/MM/YYYY" [(ngModel)]="conta.vencimento" name="vencimento"></ion-datetime>
+          <ion-datetime doneText="Selecionar" cancelText="Fechar" displayFormat="DD/MM/YYYY" formControlName="vencimento" name="vencimento"></ion-datetime>
         </ion-item>
       </ion-card-content>
     </ion-card>

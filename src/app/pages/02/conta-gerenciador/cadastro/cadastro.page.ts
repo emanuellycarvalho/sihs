@@ -11,7 +11,6 @@ import { User } from 'C:/Projects Ionic/sihs/src/app/models/user';
   styleUrls: ['./cadastro.page.scss'],
 })
 export class CadastroPage implements OnInit {
-
   id: string;
   user: User;
   users: User[];
