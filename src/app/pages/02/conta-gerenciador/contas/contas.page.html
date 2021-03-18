@@ -30,7 +30,7 @@
     <ion-list>
       <ion-item-sliding *ngFor="let conta of contas">
         <ion-item>
-          <ion-label>{{conta.tipo}} - {{conta.valor}} ({{conta.vencimento}})</ion-label>
+          <ion-label>{{conta.tipo.nome}} - {{conta.valor}} ({{conta.vencimento}})</ion-label>
           <ion-badge horizontal="end" color="{{conta.cor}}" slot="start"><ion-icon name="{{conta.icon}}-outline" (click)="pagarConta(conta.id)"></ion-icon></ion-badge>
           <ion-icon name="close-circle" horizontal="end" (click)="excluirConta(conta.id)"></ion-icon>
         </ion-item>

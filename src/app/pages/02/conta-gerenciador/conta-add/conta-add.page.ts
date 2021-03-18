@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { Conta } from '../../../../models/conta';
 import { Tipo } from '../../../../models/tipo';
 import { ToastController } from '@ionic/angular';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-conta-add',
@@ -15,12 +16,23 @@ export class ContaAddPage implements OnInit {
   tipos: Tipo[];
   conta: Conta;
   contas: Conta[];
-  id: string;
+  id: string; 
+
+  public cadastro: FormGroup;
 
   constructor(
     private navController: NavController, 
     private activatedRoute: ActivatedRoute,
-    public toastController: ToastController) { }
+    public toastController: ToastController) { 
+
+      this.cadastro = new FormGroup({
+        tipo: new FormControl('', [Validators.required]),
+        valor: new FormControl('', [Validators.required]),
+        descricao: new FormControl(),
+        vencimento: new FormControl(),
+        situacao: new FormControl(),
+      });
+    }
 
   async ionViewWillEnter() {
     this.auth();
@@ -62,24 +74,21 @@ export class ContaAddPage implements OnInit {
   }
  
   formatarObjConta(){
-    if(this.conta == null){
-      return false;
-    }
-
-    if(this.conta.valor.indexOf(",") == -1){
+    this.conta.valor = this.cadastro.value.valor;
+    if(this.cadastro.value.valor.indexOf(",") == -1){
       this.conta.valor += ",00";
     }
 
-    if(this.conta.vencimento == null){
+    if(this.cadastro.value.vencimento == null){
       this.conta.vencimento = "Sem data";
     } else {
-      let data = this.conta.vencimento.substring(0, 10);
+      let data = this.cadastro.value.vencimento.substring(0, 10);
       let array = data.split('-');
       data = array[2] + "/" + array[1] + "/" + array[0];
       this.conta.vencimento = data;
     }
 
-    if(this.conta.situacao == null){
+    if(this.cadastro.value.situacao == null){
       this.conta.situacao = "Pendente";
       this.conta.icon = "wallet";
       this.conta.cor = "primary";
@@ -91,6 +100,7 @@ export class ContaAddPage implements OnInit {
 
     for(let i = 0; i < this.tipos.length; i++){
       if(this.tipos[i] != null && this.tipo === this.tipos[i].id)
+      this.cadastro.value.tipo = this.tipos[i];
       this.conta.tipo = this.tipos[i];
       return true;
     }
@@ -107,8 +117,8 @@ export class ContaAddPage implements OnInit {
       if(id != null){
         for(let i = 0; i < users.length; i++){
 
-          if(id === users[i].id){
-            this.conta.user = users[i].id;
+          if(id == users[i].id){
+              this.conta.user = users[i];
             return; 
           } 
         }
@@ -135,10 +145,17 @@ export class ContaAddPage implements OnInit {
       localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
     } 
 
+    this.contas = JSON.parse(localStorage.getItem('contaDB'));
+    if(this.contas == null){
+      this.contas = [];
+      localStorage.setItem('contaDB', JSON.stringify(this.contas));
+    }
+
     this.activatedRoute.params.subscribe((conta: any) => { //vê se tem um id no get
       if(conta.id){
         this.conta = this.contas[this.id];
       } else {
+        this.conta = new Conta();
         this.conta.id = this.contas.length.toString();
       }
     });

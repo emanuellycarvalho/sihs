@@ -42,7 +42,7 @@ export class ContasPage implements OnInit {
   }
 
   async confirmarExclusao(conta: any){
-    let msg = conta.tipo + "(" + conta.situacao + ")";
+    let msg = conta.tipo.nome + " (" + conta.situacao + ")";
     if(conta.descricao != null){
       msg += ": <br> " + conta.descricao;
     }

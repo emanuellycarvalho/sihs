@@ -10,8 +10,6 @@
 <ion-content [fullscreen]="true">
   <form [formGroup]="cadastro" (ngSubmit)="registrarConta()"> 
 
-    <ion-input type="hidden" formControlName="user" name="user"></ion-input>
-
     <ion-card>
       <ion-card-content>
         <ion-item>
@@ -23,7 +21,7 @@
     
         <ion-item>
           <ion-label position="floating">Valor</ion-label>
-          <ion-input type="text" formControlName="valor"  name="valor"></ion-input>
+          <ion-input type="text" formControlName="valor"  name="valor" [brmasker]="{money: true, decimalCaracter: ','}"></ion-input>
         </ion-item>
     
         <ion-item>
