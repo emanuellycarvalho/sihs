@@ -57,7 +57,20 @@ export class CadastroPage implements OnInit {
 
   }
   
-  verificarUsuario(){    
+  verificarEmailValido(){
+    const email = this.cadastro.get('email');
+    if(email.touched && email.invalid){
+      return true;
+    }
+    
+    if(email.touched && email.errors != null){
+      return true;
+    }
+
+    return false;
+  }
+
+  verificarEmailExistente(){    
     if(this.cadastro.value.email == null){
       return false;
     }
@@ -95,6 +108,7 @@ export class CadastroPage implements OnInit {
 
     localStorage.setItem('userDB', JSON.stringify(this.users));
     localStorage.setItem('auth', this.user.id.toString());
+    this.exibirMensagem('Cadastro realizado com sucesso! Registre sua primeira conta a seguir.');
     this.navController.navigateBack('/conta-add');     
   }
 

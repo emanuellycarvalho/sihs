@@ -11,10 +11,11 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./conta-add.page.scss'],
 })
 export class ContaAddPage implements OnInit {
+  tipo: string;
   tipos: Tipo[];
-  contas: Conta[] = [];
-  id: string;
   conta: Conta;
+  contas: Conta[];
+  id: string;
 
   constructor(
     private navController: NavController, 
@@ -27,6 +28,9 @@ export class ContaAddPage implements OnInit {
 
   async registrarConta(){
     this.contas = JSON.parse(localStorage.getItem('contaDB'));
+    if(this.contas == null){
+      this.contas = [];
+    }
   
     if(!this.formatarObjConta()){
       this.exibirMensagem("Desculpe, ocorreu um erro ao registrar a conta.");
@@ -41,22 +45,6 @@ export class ContaAddPage implements OnInit {
 
     localStorage.setItem('contaDB', JSON.stringify(this.contas));
     this.navController.navigateBack('/contas');
-  }
-
-  ngOnInit() {
-    this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
-    if(this.tipos == null){
-      this.criarTiposPadrao();
-      localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
-    } 
-
-    this.activatedRoute.params.subscribe((conta: any) => { //vê se tem um id no get
-      if(conta.id){
-        this.conta = this.contas[this.id];
-      } else {
-        this.conta.id = this.contas.length.toString();
-      }
-    });
   }
 
   criarTiposPadrao(){
@@ -101,7 +89,14 @@ export class ContaAddPage implements OnInit {
       this.conta.cor = "success";
     }
 
-    return true;
+    for(let i = 0; i < this.tipos.length; i++){
+      if(this.tipos[i] != null && this.tipo === this.tipos[i].id)
+      this.conta.tipo = this.tipos[i];
+      return true;
+    }
+    
+    this.exibirMensagem("Desculpe, ocorreu um erro ao recuperar o tipo selecionado.");
+    return false;
   }
 
   async auth(){ //confere se tá logado
@@ -133,6 +128,22 @@ export class ContaAddPage implements OnInit {
       duration: 1500
     });
     toast.present();
+  }
+
+  ngOnInit() {
+    this.tipos = JSON.parse(localStorage.getItem('tipoDB'));
+    if(this.tipos == null){
+      this.criarTiposPadrao();
+      localStorage.setItem('tipoDB', JSON.stringify(this.tipos));
+    } 
+
+    this.activatedRoute.params.subscribe((conta: any) => { //vê se tem um id no get
+      if(conta.id){
+        this.conta = this.contas[this.id];
+      } else {
+        this.conta.id = this.contas.length.toString();
+      }
+    });
   }
 
 }

@@ -11,7 +11,7 @@ export class GerenciadorContasPage implements OnInit {
   id: string;
   user: User;
   users: User[];
-  username: string;
+  email: string;
   senha: string;
 
   constructor(private navController: NavController) { }
@@ -19,7 +19,7 @@ export class GerenciadorContasPage implements OnInit {
   async authLogin(){
     for(let i = 0; i < this.users.length; i ++){
       let user = this.users[i];
-      if(user.username === this.username && user.senha === this.senha){
+      if(user.email === this.email && user.senha === this.senha){
         localStorage.setItem('auth', user.id);
         this.navController.navigateBack('/contas'); //se tem, redireciona
       }

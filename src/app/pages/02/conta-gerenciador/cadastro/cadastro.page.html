@@ -15,19 +15,13 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email" id="email" minlength="3"></ion-input>
-      <div class="form-text text-danger">
-        <div *ngIf="cadastro.get('email').invalid && (cadastro.get('email').dirty || cadastro.get('email').touched)">
-          <small *ngIf="cadastro.get('email').errors.required">
-            Insira um email válido.
-          </small>
-        </div>
-        <div class="form-text text-danger" *ngIf="verificarUsuario()">
-          <small>
-            Email já cadastrado.
-          </small>
-        </div>
-      </div>
+      <ion-input type="email" formControlName="email" id="email"></ion-input>
+      <small class="form-text text-danger" *ngIf="verificarEmailValido()">
+        Insira um email válido.
+      </small>
+      <small class="form-text text-danger" *ngIf="verificarEmailExistente()">
+        Email já cadastrado.
+      </small>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Senha</ion-label>
