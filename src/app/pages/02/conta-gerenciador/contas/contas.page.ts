@@ -57,16 +57,10 @@ export class ContasPage implements OnInit {
           text: 'Confirmar',
           cssClass: 'success',
           handler: () => {
-
-            let urlAuxiliar = this.urlServidor + conta.id; 
-            this.httpClient.delete(urlAuxiliar).toPromise()
-            .then((json) => {
-              this.carregarLista();
-              this.exibirMensagem("Conta excluída com sucesso.");
-            })
-            .catch((erro) => {
-              console.log(erro);
-            });
+            this.contas = JSON.parse(localStorage.getItem('contaDB'));
+            this.contas[conta.id] = null;
+            localStorage.setItem('contaDB', JSON.stringify(this.contas));
+            this.navController.navigateBack('contas'); 
           }
         }
       ]
