@@ -85,23 +85,26 @@ export class ContasPage implements OnInit {
   }
 
   async auth(){ //confere se tá logado
-    let pessoas = JSON.parse(localStorage.getItem('pessoaDB'));
-    if(pessoas != null){
+    let users = JSON.parse(localStorage.getItem('userDB'));
+    if(users != null){
       let id = JSON.parse(localStorage.getItem('auth'));
+
       if(id != null){
-        for(let i = 0; i < pessoas.length; i ++){
-          let pessoa = pessoas[i];
-          if(id === pessoa.id){
-            this.user = id;
+        for(let i = 0; i < users.length; i++){
+
+          if(id == users[i].id){
+              this.conta.user = users[i];
             return; 
-          }
+          } 
         }
       }
     }
 
     localStorage.setItem('auth', null);
+    this.exibirMensagem("Por favor, realize o login para continuar.");
     this.navController.navigateBack('/gerenciador-contas'); 
   }
+
 
   async logout(){
     localStorage.setItem('auth', null);
