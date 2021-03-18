@@ -14,17 +14,17 @@
       <ion-input type="text" formControlName="nome" id="nome"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Username</ion-label>
-      <ion-input type="text" formControlName="username" id="username" minlength="3"></ion-input>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email" id="email" minlength="3"></ion-input>
       <div class="form-text text-danger">
-        <div *ngIf="cadastro.get('username').invalid && (cadastro.get('username').dirty || cadastro.get('username').touched)">
-          <small *ngIf="cadastro.get('username').errors.required || cadastro.get('username').errors.minlength">
-            Username obrigatório. Mínimo 3 caracteres.
+        <div *ngIf="cadastro.get('email').invalid && (cadastro.get('email').dirty || cadastro.get('email').touched)">
+          <small *ngIf="cadastro.get('email').errors.required">
+            Insira um email válido.
           </small>
         </div>
         <div class="form-text text-danger" *ngIf="verificarUsuario()">
           <small>
-            Username já existe
+            Email já cadastrado.
           </small>
         </div>
       </div>

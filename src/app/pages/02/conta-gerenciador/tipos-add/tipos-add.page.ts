@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { Tipo } from '../../../../models/tipo';
 
 @Component({
   selector: 'app-tipos-add',
@@ -9,12 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TiposAddPage implements OnInit {
   id: number;
-  tipos: any []; 
-  tipo = { 
-    id: null,
-    nome: null
-  };
-
+  tipos: Tipo[]; 
+  tipo: Tipo;
   constructor(private navController: NavController, private activatedRoute: ActivatedRoute) { }
 
   async ionViewWillEnter() {

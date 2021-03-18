@@ -25,7 +25,7 @@ export class CadastroPage implements OnInit {
 
     this.cadastro = new FormGroup({
       nome: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       senha: new FormControl('', [Validators.required])
     });
 
@@ -48,7 +48,7 @@ export class CadastroPage implements OnInit {
 
         this.cadastro.value.nome = user.nome;
         this.cadastro.value.senha = user.senha;
-        this.cadastro.value.username = user.username;
+        this.cadastro.value.email = user.email;
       } else {
         this.user = new User();
         this.user.id = this.users.length.toString();
@@ -58,7 +58,7 @@ export class CadastroPage implements OnInit {
   }
   
   verificarUsuario(){    
-    if(this.cadastro.value.username == null){
+    if(this.cadastro.value.email == null){
       return false;
     }
 
@@ -69,8 +69,8 @@ export class CadastroPage implements OnInit {
 
     for(var i = 0; i< this.users.length; i++){
       if(this.users[i] != null){
-        let usern = this.users[i].username;
-        if(this.cadastro.value.username === usern){
+        let email = this.users[i].email;
+        if(this.cadastro.value.email === email){
           return true;
         }
       }
@@ -83,7 +83,7 @@ export class CadastroPage implements OnInit {
 
     this.user.nome = this.cadastro.value.nome;
     this.user.senha = this.cadastro.value.senha;
-    this.user.username = this.cadastro.value.username;
+    this.user.email = this.cadastro.value.email;
 
     this.users = JSON.parse(localStorage.getItem('userDB'));
     
