@@ -1,0 +1,20 @@
+#show {
+    position: absolute;
+    width: 60px;
+    height: 19px;
+    left: 270px;
+    top: -10px;
+    z-index: 2;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    color: #d25050;
+    cursor: pointer;
+}
+
+.text-danger{
+    color:red;
+}

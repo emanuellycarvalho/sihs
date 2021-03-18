@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { User } from 'C:/Projects Ionic/sihs/src/app/models/user'; 
 
 @Component({
   selector: 'app-gerenciador-contas',
@@ -8,48 +9,36 @@ import { NavController } from '@ionic/angular';
 })
 export class GerenciadorContasPage implements OnInit {
   id: string;
-  pessoas: any [];
-  cpf: string;
-  telefone: string;
-  pessoa = { 
-    id: null,
-    nome: null,
-    dtNasc: null,
-    cpf: null,
-    telefone: null,
-    cep: null,
-    rua: null,
-    num: null,
-    bairro: null,
-    cidade: null,
-    estado: null
-  };
+  user: User;
+  users: User[];
+  username: string;
+  senha: string;
 
   constructor(private navController: NavController) { }
 
   async authLogin(){
-    for(let i = 0; i < this.pessoas.length; i ++){
-      let pessoa = this.pessoas[i];
-      if(pessoa.cpf === this.cpf && pessoa.telefone === this.telefone){
-        localStorage.setItem('auth', pessoa.id);
+    for(let i = 0; i < this.users.length; i ++){
+      let user = this.users[i];
+      if(user.username === this.username && user.senha === this.senha){
+        localStorage.setItem('auth', user.id);
         this.navController.navigateBack('/contas'); //se tem, redireciona
       }
     }
   }
 
   ngOnInit(){
-    //pega o array de pessoas, se existente
-    this.pessoas = JSON.parse(localStorage.getItem('pessoaDB'));
-    if(!this.pessoas){
-      this.pessoas = [];
-      localStorage.setItem('pessoaDB', JSON.stringify(this.pessoas));
+    //pega o array de users, se existente
+    this.users = JSON.parse(localStorage.getItem('userDB'));
+    if(!this.users){
+      this.users = [];
+      localStorage.setItem('userDB', JSON.stringify(this.users));
     }
 
     //vê se tem alguém logado
     this.id = JSON.parse(localStorage.getItem('auth'));
-    for(let i = 0; i < this.pessoas.length; i ++){
-      let pessoa = this.pessoas[i];
-      if(this.id === pessoa.id){
+    for(let i = 0; i < this.users.length; i ++){
+      let user = this.users[i];
+      if(user != null && this.id === user.id){
         this.navController.navigateBack('/contas'); //se tem, redireciona
       }
     }

@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Cadastrar Pessoa</ion-title>
+    <ion-title>Cadastre-se</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="pessoas"></ion-back-button>
     </ion-buttons>
@@ -8,55 +8,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form (ngSubmit)="submitForm()">
+  <form [formGroup]="cadastro" (ngSubmit)="enviar()">
     <ion-item>
       <ion-label position="floating">Nome</ion-label>
-      <ion-input type="text" formControlName="nome"></ion-input>
+      <ion-input type="text" formControlName="nome" id="nome"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Data Nascimento</ion-label>
-      <ion-datetime doneText="Confirmar" cancelText="Cancelar" displayFormat="DD/MM/YYYY" formControlName="dataNascimento"></ion-datetime>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" formControlName="username" id="username" minlength="3"></ion-input>
+      <div class="form-text text-danger">
+        <div *ngIf="cadastro.get('username').invalid && (cadastro.get('username').dirty || cadastro.get('username').touched)">
+          <small *ngIf="cadastro.get('username').errors.required || cadastro.get('username').errors.minlength">
+            Username obrigatório. Mínimo 3 caracteres.
+          </small>
+        </div>
+        <div class="form-text text-danger" *ngIf="verificarUsuario()">
+          <small>
+            Username já existe
+          </small>
+        </div>
+      </div>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">CPF</ion-label>
-      <ion-input type="text" formControlName="cpf" [brmasker]="{mask: '999.999.999-12'}" maxLength=14></ion-input>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" formControlName="senha" id="senha"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Telefone</ion-label>
-      <ion-input type="text" formControlName="telefone" [brmasker]="{mask: '(99) 99999-9999'}" maxLength=15></ion-input>
-    </ion-item>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">CEP</ion-label>
-            <ion-input type="text" formControlName="cep" (ionBlur)="preencherEndereco()" [brmasker]="{mask: '999999-999'}" maxLength=9></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Número</ion-label>
-            <ion-input type="text" formControlName="numero"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-item>
-      <ion-label position="floating">Rua</ion-label>
-      <ion-input type="text" formControlName="rua" readonly></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Bairro</ion-label>
-      <ion-input type="text" formControlName="bairro" readonly></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Cidade</ion-label>
-      <ion-input type="text" formControlName="cidade" readonly></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Estado</ion-label>
-      <ion-input type="text" formControlName="estado" readonly></ion-input>
-    </ion-item>
-    <ion-button type="submit" expand="block" color="primary" [disabled]="!formGroup.valid">Salvar</ion-button>
-  </form> 
+    <ion-button type="submit" expand="block" color="primary" [disabled]="!cadastro.valid">Salvar</ion-button>
+  </form>
 </ion-content>
